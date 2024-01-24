@@ -1,11 +1,11 @@
 {
   "name": "nuyola",
   "version": "1.0.0",
-  "description": "",
+  "description": "E-Commerce website for appliances",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Nurudeen Abdulsalaam",
   "license": "ISC"
 }
