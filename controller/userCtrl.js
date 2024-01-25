@@ -65,8 +65,8 @@ const getUsers = asyncHandler(
 const updateUser = asyncHandler(
     async (req, res) => {
         try{
-            const { id } = req.params;
-            const findUser = await user.findByIdAndUpdate(id, {
+            const { _id } = req.user;
+            const findUser = await user.findByIdAndUpdate(_id, {
                 firstname: req?.body?.firstname,
                 lastname: req?.body?.lastname,
                 email: req?.body?.email,
