@@ -4,8 +4,7 @@ const asyncHandler = require('express-async-handler')
 
 const createUser = asyncHandler(
     async (req, res) => {
-        const email = req.body.email;
-        const mobile = req.body.mobile
+        const { email, mobile } = req.body;
         const findEmail = await user.findOne({ email: email });
         const findMobile = await user.findOne({ mobile: mobile });
 
@@ -21,4 +20,17 @@ const createUser = asyncHandler(
     }
 )
 
-module.exports = { createUser }
+const loginUser = asyncHandler(
+    async (req, res) => {
+        const { email, password } = req.body;
+        // Check if user exist
+        const findEmail = await user.findOne({ email });
+        if (findEmail && await findEmail.checkPassword(password)) {
+                res.json(findEmail);
+        } else {
+            throw new Error("Invalid Credentials")
+        }
+    }
+    )
+
+module.exports = { createUser, loginUser }
