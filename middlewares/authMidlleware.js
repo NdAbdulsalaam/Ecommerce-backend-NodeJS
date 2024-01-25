@@ -10,7 +10,9 @@ const authMiddleware = asyncHandler (
             try {
                 if(token) {
                     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-                    console.log(decoded)
+                    const findUser = await user.findById(decoded.id);
+                    req.user = findUser;
+                    next();
                 }
 
             } catch(error) {
@@ -19,7 +21,6 @@ const authMiddleware = asyncHandler (
         } else {
             throw new Error("This is no token attached to header");
         }
-
     }
 )
 
