@@ -96,7 +96,7 @@ const blockUser = asyncHandler(
     async (req, res) => {
         const { id } = req.params;
         try{
-            const blockUser = user.findByIdAndUpdate(id, {
+            const blockUser = await user.findByIdAndUpdate(id, {
                 isBlocked: true
             }, { new: true })
             res.send("User blocked!")
@@ -110,7 +110,7 @@ const unblockUser = asyncHandler(
     async (req, res) => {
         const { id } = req.params;
         try{
-            const unblockUser = user.findByIdAndUpdate(id, {
+            const unblockUser = await user.findByIdAndUpdate(id, {
                 isBlocked: false
             }, { new: true })
             res.send("User unblocked!")
