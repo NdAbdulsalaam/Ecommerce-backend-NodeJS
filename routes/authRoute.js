@@ -9,13 +9,13 @@ const {
     updateUser,
     deleteUser
 } = require('../controller/userCtrl');
-const { authMiddleware } = require('../middlewares/authMidlleware');
+const { authMiddleware, isAdmin } = require('../middlewares/authMidlleware');
 
 
 router.post('/register', RegisterUser);
 router.post('/login', loginUser);
 router.get('/users', getUsers);
-router.get('/user/:id', authMiddleware, getUser);
+router.get('/user/:id', authMiddleware, isAdmin, getUser);
 router.put('/update/:id', updateUser);
 router.delete('/delete/:id', deleteUser);
 
