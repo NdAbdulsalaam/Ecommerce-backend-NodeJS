@@ -9,14 +9,15 @@ const {
     updateUser,
     deleteUser
 } = require('../controller/userCtrl');
+const { authMiddleware } = require('../middlewares/authMidlleware');
 
 
 router.post('/register', RegisterUser);
 router.post('/login', loginUser);
 router.get('/users', getUsers);
-router.get('/user/:id', getUser);
+router.get('/user/:id', authMiddleware, getUser);
 router.put('/update/:id', updateUser);
 router.delete('/delete/:id', deleteUser);
 
 
-module.exports = router
+module.exports = router;
