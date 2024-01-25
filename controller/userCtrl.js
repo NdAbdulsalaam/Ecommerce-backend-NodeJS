@@ -44,8 +44,8 @@ const getUser = asyncHandler(
     async (req, res) => {
         try {
             const { id } = req.params;
-            const findUser = await user.findById(id);
-            res.json(findUser)
+            const getUser = await user.findById(id);
+            res.json(getUser)
        } catch(error) {
             throw new Error(error)
        }
@@ -55,8 +55,8 @@ const getUser = asyncHandler(
 const getUsers = asyncHandler(
     async (req, res) => {
        try {
-            const allUsers = await user.find();
-            res.json(allUsers)
+            const getUsers = await user.find();
+            res.json(getUsers)
        } catch(error){
             throw new Error(error)
        }
@@ -66,14 +66,14 @@ const updateUser = asyncHandler(
     async (req, res) => {
         try{
             const { _id } = req.user;
-            const findUser = await user.findByIdAndUpdate(_id, {
+            const updateUser = await user.findByIdAndUpdate(_id, {
                 firstname: req?.body?.firstname,
                 lastname: req?.body?.lastname,
                 email: req?.body?.email,
                 mobile: req?.body?.mobile,
                 role: req?.body?.role,
             }, { new: true })
-            res.json(findUser)
+            res.json(updateUser)
         } catch(error) {
             throw new Error(error)
         }
@@ -84,7 +84,7 @@ const deleteUser = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            const findUser = await user.findByIdAndDelete(id)
+            const deleteUser = await user.findByIdAndDelete(id)
             res.send(`User deleted successfully`)
         } catch(error) {
             throw new Error(error)
