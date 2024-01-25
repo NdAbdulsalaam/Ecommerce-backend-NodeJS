@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { generateToken } = require('../config/jwtToken');
 
 
-const createUser = asyncHandler(
+const RegisterUser = asyncHandler(
     async (req, res) => {
         const { email, mobile } = req.body;
         const findEmail = await user.findOne({ email: email });
@@ -50,4 +50,10 @@ const getUsers = asyncHandler(
        }
     });
 
-module.exports = { createUser, loginUser, getUsers }
+const getUser = asyncHandler(
+    async (req, res) => {
+        const{ id } = req.params
+        console.log(id)
+});
+
+module.exports = { RegisterUser, loginUser, getUsers, getUser }
