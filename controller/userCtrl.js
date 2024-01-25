@@ -12,7 +12,7 @@ const RegisterUser = asyncHandler(
         if (!findEmail && !findMobile) {
             // create a new user
             const newUser = user.create(req.body);
-            res.json(newUser)
+            res.json(req.body)
     
         } else{
             // User already exist
@@ -70,7 +70,8 @@ const updateUser = asyncHandler(
                 firstname: req?.body?.firstname,
                 lastname: req?.body?.lastname,
                 email: req?.body?.email,
-                mobile: req?.body?.mobile
+                mobile: req?.body?.mobile,
+                role: req?.body?.role,
             }, { new: true })
             res.json(findUser)
         } catch(error) {
