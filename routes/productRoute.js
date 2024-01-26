@@ -4,7 +4,7 @@ const router = express.Router();
 const { createProduct } = require('../controller/productCtrl');
 
 
-router.post('/procducts', createProduct)
+router.post('/products', createProduct)
 
 
 module.exports = router
