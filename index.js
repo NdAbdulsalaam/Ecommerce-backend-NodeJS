@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser())
 
-app.use('/', authRouter);
+app.use('/user', authRouter);
 
 app.use(notFound)
 app.use(errorHandler) 
