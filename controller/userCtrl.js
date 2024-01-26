@@ -6,8 +6,6 @@ const { validateMongoDbId } = require('./utils/validateMongoDbId');
 
 const RegisterUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         const { email, mobile } = req.body;
         const findEmail = await user.findOne({ email: email });
         const findMobile = await user.findOne({ mobile: mobile });
@@ -26,8 +24,6 @@ const RegisterUser = asyncHandler(
 
 const loginUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         const { email, password } = req.body;
         // Check if user exist
         const findUser = await user.findOne({ email });
@@ -47,10 +43,9 @@ const loginUser = asyncHandler(
 
 const getUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         try {
             const { id } = req.params;
+            validateMongoDbId(id)
             const getUser = await user.findById(id);
             res.json(getUser)
        } catch(error) {
@@ -61,8 +56,6 @@ const getUser = asyncHandler(
 
 const getUsers = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
        try {
             const getUsers = await user.find();
             res.json(getUsers)
@@ -73,10 +66,9 @@ const getUsers = asyncHandler(
 
 const updateUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         try{
             const { _id } = req.user;
+            validateMongoDbId(_id)
             const updateUser = await user.findByIdAndUpdate(_id, {
                 firstname: req?.body?.firstname,
                 lastname: req?.body?.lastname,
@@ -93,10 +85,9 @@ const updateUser = asyncHandler(
 
 const deleteUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         try{
             const { id } = req.params;
+            validateMongoDbId(id)
             const deleteUser = await user.findByIdAndDelete(id)
             res.send(`User deleted successfully`)
         } catch(error) {
@@ -107,9 +98,8 @@ const deleteUser = asyncHandler(
 
 const blockUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-
         const { id } = req.params;
+        validateMongoDbId(id)
         try{
             const blockUser = await user.findByIdAndUpdate(id, {
                 isBlocked: true
@@ -123,9 +113,8 @@ const blockUser = asyncHandler(
 
 const unblockUser = asyncHandler(
     async (req, res) => {
-        validateMongoDbId(id)
-        
         const { id } = req.params;
+        validateMongoDbId(id)
         try{
             const unblockUser = await user.findByIdAndUpdate(id, {
                 isBlocked: false
