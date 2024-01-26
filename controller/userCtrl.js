@@ -15,7 +15,7 @@ const RegisterUser = asyncHandler(
         if (!findEmail && !findMobile) {
             // create a new user
             const newUser = user.create(req.body);
-            res.json(req.body)
+            res.json(newUser)
     
         } else{
             // User already exist
