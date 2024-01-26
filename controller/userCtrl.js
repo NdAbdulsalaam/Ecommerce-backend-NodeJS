@@ -137,9 +137,9 @@ const updateUser = asyncHandler(
 const deleteUser = asyncHandler(
     async (req, res) => {
         try{
-            const { id } = req.params;
+            const { _id } = req.user;
             validateMongoDbId(id)
-            const deleteUser = await user.findByIdAndDelete(id)
+            const deleteUser = await user.findByIdAndDelete(_id)
             res.send(`User deleted successfully`)
         } catch(error) {
             throw new Error(error)
