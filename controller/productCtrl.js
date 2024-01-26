@@ -44,9 +44,40 @@ const getProducts = asyncHandler(
 )
 
 
+const updateProduct = asyncHandler(
+    async (req, res) => {
+        try{
+            const { id } = req.params;
+            validateMongoDbId(_id)
+            const updateProduct = await user.findByIdAndUpdate(
+                id,
+                req.body,
+                { new: true })
+            res.json(updateProduct)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
+const deleteProduct = asyncHandler(
+    async (req, res) => {
+        try{
+            const { id } = req.params;
+            validateMongoDbId(id)
+            const deleteUser = await user.findByIdAndDelete(id)
+            res.send(`Product deleted successfully`)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 
 module.exports = {
     createProduct,
     getProduct,
-    getProducts
+    getProducts,
+    updateProduct,
+    deleteProduct
 };
