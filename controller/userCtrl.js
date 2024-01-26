@@ -2,7 +2,7 @@ const user = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 const { generateToken } = require('../config/jwtToken');
 const { generateRefreshToken } = require('../config/jwtRefreshToken');
-const { validateMongoDbId } = require('./utils/validateMongoDbId');
+const { validateMongoDbId } = require('../utils/validateMongoDbId');
 const jwt = require('jsonwebtoken');
 
 
