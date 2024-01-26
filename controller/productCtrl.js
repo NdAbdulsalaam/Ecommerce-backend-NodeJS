@@ -4,7 +4,7 @@ const product = require("../models/productModel");
 
 const createProduct = syncHandler(
     async (req, res) => {
-
+        res.send('Hey these are my products')
     }
 )
 
