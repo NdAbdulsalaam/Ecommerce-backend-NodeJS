@@ -49,7 +49,7 @@ const updateProduct = asyncHandler(
         try{
             const { id } = req.params;
             validateMongoDbId(_id)
-            const updateProduct = await user.findByIdAndUpdate(
+            const updateProduct = await product.findByIdAndUpdate(
                 id,
                 req.body,
                 { new: true })
@@ -65,7 +65,7 @@ const deleteProduct = asyncHandler(
         try{
             const { id } = req.params;
             validateMongoDbId(id)
-            const deleteUser = await user.findByIdAndDelete(id)
+            const deleteProduct = await product.findByIdAndDelete(id)
             res.send(`Product deleted successfully`)
         } catch(error) {
             throw new Error(error)
