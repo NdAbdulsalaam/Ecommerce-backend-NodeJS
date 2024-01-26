@@ -78,12 +78,12 @@ const logoutUser = asyncHandler(
 const refreshToken = asyncHandler(
     async (req, res) => {
         const { refreshToken } = req.cookies;
-        if(!refreshToken) throw new Error("No refresh token found");
+        if(!refreshToken) throw new Error("No refresh token found. Please login!");
         const findUser = await user.findOne({ refreshToken });
-        if(!findUser) throw new Error("Invalid refresh token");
+        if(!findUser) throw new Error("User does not exist. Please sign-up");
         jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
             if(err || findUser.id !== decoded.id) {
-                throw new Error("Refesh token not match user");
+                throw new Error("Refresh token not match user");
             } else {
                 const accessToken = generateToken(findUser._id)
                 res.json(accessToken)
