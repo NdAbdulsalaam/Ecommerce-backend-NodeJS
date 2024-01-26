@@ -31,7 +31,7 @@ const loginUser = asyncHandler(
         const findUser = await user.findOne({ email });
         if (findUser && await findUser.checkPassword(password)) {
             const refreshToken = await generateRefreshToken(findUser._id)
-            const updateUser = await user.findOneAndReplace(
+            const updateUser = await user.findOneAndUpdate(
                 findUser._id, {
                 refreshToken: refreshToken,
             }, { new: true });
@@ -54,14 +54,31 @@ const loginUser = asyncHandler(
 
 const logoutUser = asyncHandler(
     async (req, res) => {
-
-    }
-)
+        const { refreshToken } = req.cookies;
+        if(!refreshToken) throw new Error("No refersh token found");
+        const findUser = await user.findOne({ refreshToken });
+        if(!findUser) {
+            res.clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: true,
+            });
+            res.sendStatus(204) //forbidden
+        } else {
+            await user.findOneAndUpdate({refreshToken}, {
+                refreshToken: "",
+            }, { new: true });
+            res.clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: true,
+            });
+            res.sendStatus(204);
+        }
+    });
 
 const refreshToken = asyncHandler(
     async (req, res) => {
         const { refreshToken } = req.cookies;
-        if(!refreshToken) throw new Error("No refersh token found");
+        if(!refreshToken) throw new Error("No refresh token found");
         const findUser = await user.findOne({ refreshToken });
         if(!findUser) throw new Error("Invalid refresh token");
         jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
