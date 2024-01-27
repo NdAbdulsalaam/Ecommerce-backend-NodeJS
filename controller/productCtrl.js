@@ -3,6 +3,8 @@ const sluglify = require('slugify');
 
 const product = require("../models/productModel");
 const { default: slugify } = require("slugify");
+const { validate } = require("../models/userModel");
+const { validateMongoDbId } = require("../utils/validateMongoDbId");
 
 
 const createProduct = asyncHandler(
@@ -47,10 +49,10 @@ const getProducts = asyncHandler(
 const updateProduct = asyncHandler(
     async (req, res) => {
         try{
-            const { _id } = req.product;
-            validateMongoDbId(_id)
+            const { id } = req.params;
+            validateMongoDbId(id)
             const updateProduct = await product.findByIdAndUpdate(
-                _id,
+                id,
                 req.body,
                 { new: true })
             res.json(updateProduct)
@@ -63,9 +65,9 @@ const updateProduct = asyncHandler(
 const deleteProduct = asyncHandler(
     async (req, res) => {
         try{
-            const { _id } = req.product;
+            const { id } = req.params;
             validateMongoDbId(id)
-            const deleteProduct = await product.findByIdAndDelete(_id)
+            const deleteProduct = await product.findByIdAndDelete(id)
             res.send(`Product deleted successfully`)
         } catch(error) {
             throw new Error(error)
