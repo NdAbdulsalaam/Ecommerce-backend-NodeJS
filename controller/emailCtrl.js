@@ -21,8 +21,8 @@ const sendEmail = expressAsyncHandler(
               from: emailUser,
               to: data.to, // list of receivers
               subject: data.subject,
-              text: data.text,
               html: data.html,
+              text: data.text
             });
           
             console.log("Message sent: %s", info.messageId);

@@ -4,6 +4,7 @@ const { generateToken } = require('../config/jwtToken');
 const { generateRefreshToken } = require('../config/jwtRefreshToken');
 const { validateMongoDbId } = require('../utils/validateMongoDbId');
 const jwt = require('jsonwebtoken');
+const { sendEmail } = require('./emailCtrl');
 
 
 const RegisterUser = asyncHandler(
@@ -162,6 +163,35 @@ const updatePassword = asyncHandler(
     }
 )
 
+const forgotPassword = asyncHandler(
+    async (req, res) => {
+        const { email } = req.body;
+        const currentUser = await userModel.findOne({ email });
+        if(!currentUser) throw new Error("Email not registered. signup")
+        
+        if(currentUser) {
+            try{
+                const resetToken = await currentUser.generatePasswordResetToken();
+                await currentUser.save() 
+                const resetURL = `http://localhost:5000/user/password/forgot/${resetToken}`
+                const resetMessage =`Please click <a href=${resetURL}>here</a> to reset password`
+                const data = {
+                    to: email,
+                    subject: "Link: Forgot password reset",
+                    html: resetMessage,
+                    text: "Link valid for 24 hours from now!"
+                };
+                sendEmail(data);
+
+                res.json(resetToken)                 
+            } catch(error) {
+                throw new Error(error)
+            }
+        }
+
+    }
+)
+
 // Admin Only section
 const blockUser = asyncHandler(
     async (req, res) => {
@@ -205,5 +235,6 @@ module.exports = {
     deleteUser,
     blockUser,
     unblockUser,
-    updatePassword
+    updatePassword,
+    forgotPassword,
 }
