@@ -1,9 +1,11 @@
 const userModel = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+
 const { generateToken } = require('../config/jwtToken');
 const { generateRefreshToken } = require('../config/jwtRefreshToken');
 const { validateMongoDbId } = require('../utils/validateMongoDbId');
-const jwt = require('jsonwebtoken');
 const { sendEmail } = require('./emailCtrl');
 
 
@@ -175,13 +177,12 @@ const forgotPassword = asyncHandler(
             try{
                 const resetToken = await currentUser.generatePasswordResetToken();
                 await currentUser.save() 
-                const resetURL = `http://localhost:5000/user/password/forgot/${resetToken}`
-                const resetMessage =`Please click <a href=${resetURL}>here</a> to reset password`
+                const resetURL = `http://localhost:5000/user/password/reset/${resetToken}`
+                const resetMessage =`Link valid for 24 hours. Please click <a href=${resetURL}>here</a> to reset password`
                 const data = {
                     to: email,
-                    subject: "Link: Forgot password reset",
+                    subject: "Reset password",
                     html: resetMessage,
-                    text: "Link valid for 24 hours from now!"
                 };
                 sendEmail(data);
 
@@ -191,6 +192,25 @@ const forgotPassword = asyncHandler(
             }
         }
 
+    }
+)
+
+const resetPassword = asyncHandler(
+    async (req, res) => {
+        const { password } = req.body;
+        const { resetToken } = req.params;
+        const hashedToken = crypto.createHash('sha256')
+        .update.apply(resetToken).digest('hex')
+        const currentUser = userModel.findOne({ 
+            passwordResetToken:hashedToken,
+            passwordResetExpires: { $gt: Date.now() }
+        });
+        if(!currentUser) throw new Error("Reset token expired. Try again");
+        currentUser.password = password;
+        currentUser.passwordResetToken = undefined;
+        currentUser.passwordResetExpires= undefined;
+        await currentUser.save();
+        res.json(currentUser);
     }
 )
 
@@ -239,4 +259,5 @@ module.exports = {
     unblockUser,
     updatePassword,
     forgotPassword,
+    resetPassword
 }
