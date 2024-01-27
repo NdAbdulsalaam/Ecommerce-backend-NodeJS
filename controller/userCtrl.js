@@ -147,6 +147,22 @@ const deleteUser = asyncHandler(
     }
 )
 
+const updatePassword = asyncHandler(
+    async (req, res) => {
+        const { _id } = req.user(_id);
+        const { password } = req.body
+        validateMongoDbId(_id)
+        const currentUser = user.findById(_id);
+        if(passwor) {
+            currentUser.password =  password
+            const updatedPassword = await currentUser.save();
+            res.json(updatedPassword);
+        }
+
+    }
+)
+
+// Admin Only section
 const blockUser = asyncHandler(
     async (req, res) => {
         const { id } = req.params;
@@ -189,4 +205,5 @@ module.exports = {
     deleteUser,
     blockUser,
     unblockUser,
+    updatePassword
 }
