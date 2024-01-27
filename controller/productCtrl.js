@@ -54,6 +54,14 @@ const getProducts = asyncHandler(
                 query = query.sort("-updatedAt")
             }
 
+            // Limit by fields
+            if(req.query.fields) {
+                const fields = req.query.fields.split(",").join(" ")
+                query = query.select(fields)
+            } else{
+                query = query.select("-__v")
+            }
+
 
             // Results
             const queryProducts = await query
