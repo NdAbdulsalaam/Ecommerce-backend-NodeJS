@@ -1,4 +1,4 @@
-const user = require('../models/userModel');
+const userModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const  asyncHandler = require('express-async-handler');
 
@@ -10,7 +10,7 @@ const authMiddleware = asyncHandler(
             try {
                 if(token) {
                     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-                    const currentUser = await user.findById(decoded.id);
+                    const currentUser = await userModel.findById(decoded.id);
                     req.user = currentUser;
                     next();
                 }
@@ -19,7 +19,7 @@ const authMiddleware = asyncHandler(
                 throw new Error("Not authorized or token expired. Please login again");
             }
         } else {
-            throw new Error("This is no token attached to header");
+            throw new Error("Token not found. Please login or Reset Password");
         }
     }
 )
@@ -27,7 +27,7 @@ const authMiddleware = asyncHandler(
 const isAdmin = asyncHandler(
     async (req, res, next) => {
         const { email } = req.user
-        const findAdmin = await user.findOne({ email })
+        const findAdmin = await userModel.findOne({ email })
         if(findAdmin.role == "admin") {
             next();
         } else {
