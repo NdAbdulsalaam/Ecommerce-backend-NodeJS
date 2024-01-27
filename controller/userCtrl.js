@@ -137,9 +137,9 @@ const updateUser = asyncHandler(
 const deleteUser = asyncHandler(
     async (req, res) => {
         try{
-            const { id } = req.params;
-            validateMongoDbId(id)
-            const deleteUser = await user.findByIdAndDelete(id)
+            const { _id } = req.user;
+            validateMongoDbId(_id)
+            const deleteUser = await user.findByIdAndDelete(_id)
             res.send(`User deleted successfully`)
         } catch(error) {
             throw new Error(error)
@@ -149,11 +149,11 @@ const deleteUser = asyncHandler(
 
 const updatePassword = asyncHandler(
     async (req, res) => {
-        const { _id } = req.user(_id);
-        const { password } = req.body
+        const { _id } = req.user;
+        const { password } = req.body;
         validateMongoDbId(_id)
         const currentUser = user.findById(_id);
-        if(passwor) {
+        if(password) {
             currentUser.password =  password
             const updatedPassword = await currentUser.save();
             res.json(updatedPassword);
@@ -165,10 +165,10 @@ const updatePassword = asyncHandler(
 // Admin Only section
 const blockUser = asyncHandler(
     async (req, res) => {
-        const { id } = req.params;
-        validateMongoDbId(id)
+        const { _id } = req.user;
+        validateMongoDbId(_id)
         try{
-            const blockUser = await user.findByIdAndUpdate(id, {
+            const blockUser = await user.findByIdAndUpdate(_id, {
                 isBlocked: true
             }, { new: true })
             res.send("User blocked!")
@@ -180,10 +180,10 @@ const blockUser = asyncHandler(
 
 const unblockUser = asyncHandler(
     async (req, res) => {
-        const { id } = req.params;
-        validateMongoDbId(id)
+        const { _id } = req.user;
+        validateMongoDbId(_id)
         try{
-            const unblockUser = await user.findByIdAndUpdate(id, {
+            const unblockUser = await user.findByIdAndUpdate(_id, {
                 isBlocked: false
             }, { new: true })
             res.send("User unblocked!")
