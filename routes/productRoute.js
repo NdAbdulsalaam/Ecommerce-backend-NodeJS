@@ -10,7 +10,7 @@ const {
 } = require('../controller/productCtrl');
 const { isAdmin, authMiddleware } = require('../middlewares/authMidlleware');
 
-router.post('/create', isAdmin, createProduct)
+router.post('/create', authMiddleware, isAdmin, createProduct)
 router.get('/products', getProducts)
 router.put('/update/:id', authMiddleware, isAdmin, updateProduct)
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteProduct)
