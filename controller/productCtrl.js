@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const sluglify = require('slugify');
 
-const product = require("../models/productModel");
+const productModel = require("../models/productModel");
 const { default: slugify } = require("slugify");
 const { validate } = require("../models/userModel");
 const { validateMongoDbId } = require("../utils/validateMongoDbId");
@@ -13,7 +13,7 @@ const createProduct = asyncHandler(
             if(req.body.title) {
                 req.body.slug = slugify(req.body.title)
             }
-            const newProduct = await product.create(req.body);
+            const newProduct = await productModel.create(req.body);
             res.json(newProduct)
 
         } catch(error) {
@@ -26,7 +26,7 @@ const getProduct = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            const findProduct = await product.findById(id)
+            const findProduct = await productModel.findById(id)
             res.json(findProduct)
         } catch(error) {
             throw new Error(error);
@@ -44,7 +44,7 @@ const getProducts = asyncHandler(
             let queryString = JSON.stringify(queryObjs);
             // catch >, >=, <, <= using regex 
             queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
-            let query = product.find(JSON.parse(queryString))
+            let query = productModel.find(JSON.parse(queryString))
 
             // Sorting
             if(req.query.sort) {
@@ -69,7 +69,7 @@ const getProducts = asyncHandler(
                 const pageSkip = (page - 1) * pageLimit
                 query = query.skip(pageSkip).limit(pageLimit)
 
-                const productCount = await product.countDocuments();
+                const productCount = await productModel.countDocuments();
                 if(pageSkip >= productCount) throw new Error("This page does not exist")
             }
 
@@ -90,7 +90,7 @@ const updateProduct = asyncHandler(
         try{
             const { id } = req.params;
             validateMongoDbId(id)
-            const updateProduct = await product.findByIdAndUpdate(
+            const updateProduct = await productModel.findByIdAndUpdate(
                 id,
                 req.body,
                 { new: true })
@@ -106,7 +106,7 @@ const deleteProduct = asyncHandler(
         try{
             const { id } = req.params;
             validateMongoDbId(id)
-            const deleteProduct = await product.findByIdAndDelete(id)
+            const deleteProduct = await productModel.findByIdAndDelete(id)
             res.send(`Product deleted successfully`)
         } catch(error) {
             throw new Error(error)
