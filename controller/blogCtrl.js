@@ -35,12 +35,12 @@ const getPost = expressAsyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            const currentPost = await blogModel.findById(id);
+            const getPost = await blogModel.findById(id);
             await blogModel.findByIdAndUpdate(id,
                 { $inc: { totalView: 1 }, },
                 { new: true}
                 )
-            res.json(currentPost)
+            res.json(getPost)
         } catch(error) {
             throw new Error(error)
         }
@@ -58,9 +58,25 @@ const getPosts = expressAsyncHandler(
     }
 )
 
+const deletePost = expressAsyncHandler(
+    async (req, res) => {
+        try{
+            const { id } = req.params;
+            const deletePost = await blogModel.findByIdAndDelete(id);
+            res.json(deletePost);
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
+
+
+
 module.exports = {
     createPost,
     updatePost,
     getPost,
-    getPosts
+    getPosts,
+    deletePost
 }
