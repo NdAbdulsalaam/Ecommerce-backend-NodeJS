@@ -7,15 +7,17 @@ const {
     updatePost,
     getPost,
     getPosts,
-    deletePost
+    deletePost,
+    likePost
 } = require('../controller/blogCtrl');
 
 
 router.post('/create', authMiddleware, createPost);
-router.put('/update/:id', authMiddleware, updatePost)
-router.delete('/delete/:id', authMiddleware, deletePost)
-router.get('/all', getPosts)
-router.get('/:id', getPost)
+router.put('/update/:id', authMiddleware, updatePost);
+router.delete('/delete/:id', authMiddleware, deletePost);
+router.put('/like/:id', authMiddleware, likePost);
+router.get('/all', getPosts);
+router.get('/:id', getPost);
 
 
 module.exports = router;

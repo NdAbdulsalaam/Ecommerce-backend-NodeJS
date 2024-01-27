@@ -70,6 +70,53 @@ const deletePost = expressAsyncHandler(
     }
 )
 
+const likePost = expressAsyncHandler(
+    async (req, res) => {
+        const  postId = req.params.id;
+        // Fetch liked post
+        const currentPost = await blogModel.findById(postId);
+        if(!currentPost) throw new Error("Can't retrieve post. It is either deleted or doesn't exist")
+        // Fetch user that liked it
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to like posts");
+        // Check if post has been disliked by user and remove
+        const likedByUser = currentPost.isLiked;
+        // Check if post has been disliked by user and remove
+        const dislikedByUser = currentPost.dislike?.find(
+            (userId) => userId?.toString() === currentUserId.toString()
+        );
+        if(likedByUser) {
+            const currentPost = await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $pull: {like: currentUserId},
+                    isLiked: false
+                },
+                { new:true }
+            )
+        } else if(dislikedByUser) {
+                const currentPost = await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $pull: {dislike: currentUserId},
+                    isDisliked: false
+                },
+                { new:true }
+            )
+        } else {
+            const currentPost = await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $push: {like: currentUserId},
+                    isLiked: true
+                },
+                { new:true }
+            )
+        }
+        res.json(currentPost)
+    }
+)
+
 
 
 
@@ -78,5 +125,6 @@ module.exports = {
     updatePost,
     getPost,
     getPosts,
-    deletePost
+    deletePost,
+    likePost
 }
