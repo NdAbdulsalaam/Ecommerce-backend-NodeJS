@@ -22,11 +22,11 @@ router.post('/login', loginUser);
 router.get('/logout', logoutUser);
 router.get('/users', getUsers);
 router.get('/refresh-token', refreshToken);
-router.put('/update', authMiddleware, updateUser);
+router.put('/update/:id', authMiddleware, updateUser);
 router.delete('/delete/:id', deleteUser);
 router.put('/block/:id', authMiddleware, isAdmin, blockUser);
 router.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);
-router.get('/:id', authMiddleware, isAdmin, getUser);
+router.get('/:id', authMiddleware, getUser);
 
 
 module.exports = router;
