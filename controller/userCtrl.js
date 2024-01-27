@@ -18,9 +18,11 @@ const RegisterUser = asyncHandler(
             const newUser = userModel.create(req.body);
             res.json(newUser)
     
-        } else{
+        } else if (findEmail) {
             // User already exist
-           throw new Error('User Already Exist')
+           throw new Error('User Already Exist. This email has been used')
+        } else {
+            throw new Error('User Already Exist. This Mobile number has been used')
         }
     }
 )
