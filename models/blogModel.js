@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 
-const mongoose = require('mongoose'); // Erase if already required
-
 // Declare the Schema of the Mongo model
 var blogSchema = new mongoose.Schema({
-    tile:{
+    title:{
         type:String,
         required:true,
     },
-    body:{
+    text:{
         type:String,
         required:true,
     },
@@ -57,4 +55,4 @@ var blogSchema = new mongoose.Schema({
 );
 
 //Export the model
-module.exports = mongoose.model('Blog', userSchema);
+module.exports = mongoose.model('Blog', blogSchema);
