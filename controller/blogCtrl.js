@@ -17,6 +17,21 @@ const createPost = expressAsyncHandler(
     }
 )
 
+const updatePost = expressAsyncHandler(
+    async (req, res) => {
+        try{
+            const { id } = req.params;
+            const updatePost = await blogModel.findByIdAndUpdate(id,
+                req.body,
+                { new:true })
+            res.json(updatePost)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 module.exports = {
-    createPost
+    createPost,
+    updatePost
 }
