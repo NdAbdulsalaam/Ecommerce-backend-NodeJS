@@ -198,12 +198,12 @@ const forgotPassword = asyncHandler(
 const resetPassword = asyncHandler(
     async (req, res) => {
         const { password } = req.body;
-        const { resetToken } = req.params;
+        const { token } = req.params;
         const hashedToken = crypto.createHash('sha256')
-        .update.apply(resetToken).digest('hex')
-        const currentUser = userModel.findOne({ 
+        .update(token).digest('hex')
+        const currentUser = await userModel.findOne({ 
             passwordResetToken:hashedToken,
-            passwordResetExpires: { $gt: Date.now() }
+            passwordResetExpires: { $gt: Date.now() },
         });
         if(!currentUser) throw new Error("Reset token expired. Try again");
         currentUser.password = password;
