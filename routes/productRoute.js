@@ -11,7 +11,7 @@ const {
 const { isAdmin, authMiddleware } = require('../middlewares/authMidlleware');
 
 router.post('/create', authMiddleware, isAdmin, createProduct)
-router.get('/products', getProducts)
+router.get('/all', getProducts)
 router.put('/update/:id', authMiddleware, isAdmin, updateProduct)
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteProduct)
 router.get('/:id', getProduct)
