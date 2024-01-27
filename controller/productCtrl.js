@@ -62,6 +62,18 @@ const getProducts = asyncHandler(
                 query = query.select("-__v")
             }
 
+            // Pagenation
+            if(req.query.page) {
+                const page = req.query.page;
+                const pageLimit = req.query.limit;
+                const pageSkip = (page - 1) * pageLimit
+                query = query.skip(pageSkip).limit(pageLimit)
+
+                const productCount = await product.countDocuments();
+                if(pageSkip >= productCount) throw new Error("This page does not exist")
+            }
+
+
 
             // Results
             const queryProducts = await query
