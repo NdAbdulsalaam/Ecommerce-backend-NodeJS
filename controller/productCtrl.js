@@ -37,14 +37,20 @@ const getProduct = asyncHandler(
 const getProducts = asyncHandler(
     async (req, res) => {
        try{
+            // Filtering
             const queryObjs = { ...req.query }
             const excludeFields = ["page", "sort", "limit", "fields"];
             excludeFields.forEach((el) => delete queryObjs[el]);
-            
             let queryString = JSON.stringify(queryObjs);
             // catch >, >=, <, <= using regex 
             queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
-            const queryProducts = await product.find(JSON.parse(queryString))
+            const query = product.find(JSON.parse(queryString))
+            
+            // Sorting
+
+
+            // Results
+            const queryProducts = await query
             res.json(queryProducts)
        } catch(error) {
             throw new Error(error)
