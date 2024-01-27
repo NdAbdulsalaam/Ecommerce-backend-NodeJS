@@ -44,9 +44,15 @@ const getProducts = asyncHandler(
             let queryString = JSON.stringify(queryObjs);
             // catch >, >=, <, <= using regex 
             queryString = queryString.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`)
-            const query = product.find(JSON.parse(queryString))
-            
+            let query = product.find(JSON.parse(queryString))
+
             // Sorting
+            if(req.query.sort) {
+                const sortBy = req.query.sort.split(",").join(" ")
+                query = query.sort(sortBy)
+            } else{
+                query = query.sort("-updatedAt")
+            }
 
 
             // Results
