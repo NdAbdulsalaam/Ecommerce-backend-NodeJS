@@ -79,12 +79,23 @@ const likePost = expressAsyncHandler(
         // Fetch user that liked it
         const currentUserId = req.user._id;
         if(!currentUserId) throw new Error("You're not in. You need to login to like posts");
-        // Check if post has been disliked by user and remove
-        const likedByUser = currentPost.isLiked;
+
         // Check if post has been disliked by user and remove
         const dislikedByUser = currentPost.dislike?.find(
             (userId) => userId?.toString() === currentUserId.toString()
         );
+        if(dislikedByUser) {
+                await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $pull: {dislike: currentUserId},
+                    isDisliked: false
+                },
+                { new:true }
+            )
+        } 
+        // Check if post has been liked by user and remove. If not, like!
+        const likedByUser = currentPost.isLiked;
         if(likedByUser) {
             const currentPost = await blogModel.findByIdAndUpdate(
                 postId,
@@ -94,15 +105,7 @@ const likePost = expressAsyncHandler(
                 },
                 { new:true }
             )
-        } else if(dislikedByUser) {
-                const currentPost = await blogModel.findByIdAndUpdate(
-                postId,
-                { 
-                    $pull: {dislike: currentUserId},
-                    isDisliked: false
-                },
-                { new:true }
-            )
+            res.json(currentPost)
         } else {
             const currentPost = await blogModel.findByIdAndUpdate(
                 postId,
@@ -112,12 +115,60 @@ const likePost = expressAsyncHandler(
                 },
                 { new:true }
             )
+            res.json(currentPost)
         }
-        res.json(currentPost)
     }
 )
 
+const dislikePost = expressAsyncHandler(
+    async (req, res) => {
+        const  postId = req.params.id;
+        // Fetch liked post
+        const currentPost = await blogModel.findById(postId);
+        if(!currentPost) throw new Error("Can't retrieve post. It is either deleted or doesn't exist")
+        // Fetch user that liked it
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to like posts");
 
+        // Check if post has been disliked by user and remove
+        const likedByUser = currentPost.like?.find(
+            (userId) => userId?.toString() === currentUserId.toString()
+        );
+        if(likedByUser) {
+            await blogModel.findByIdAndUpdate(
+            postId,
+            { 
+                $pull: {like: currentUserId},
+                isLiked: false
+            },
+            { new:true }
+        )
+        }
+        // Check if post has been disliked by user and remove. if not, dislike!
+        const dislikedByUser = currentPost.isDisliked;
+        if(dislikedByUser) {
+            const currentPost = await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $pull: {dislike: currentUserId},
+                    isDisliked: false
+                },
+                { new:true }
+            )
+            res.json(currentPost)
+        } else {
+            const currentPost = await blogModel.findByIdAndUpdate(
+                postId,
+                { 
+                    $push: {dislike: currentUserId},
+                    isDisliked: true
+                },
+                { new:true }
+            )
+            res.json(currentPost)
+        }
+    }
+)
 
 
 module.exports = {
@@ -126,5 +177,6 @@ module.exports = {
     getPost,
     getPosts,
     deletePost,
-    likePost
+    likePost,
+    dislikePost
 }
