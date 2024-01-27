@@ -47,8 +47,20 @@ const getPost = expressAsyncHandler(
     }
 )
 
+const getPosts = expressAsyncHandler(
+    async (req, res) => {
+        try{
+            const getPosts = await blogModel.find();
+            res.json(getPosts)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 module.exports = {
     createPost,
     updatePost,
     getPost,
+    getPosts
 }
