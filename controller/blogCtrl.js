@@ -31,7 +31,24 @@ const updatePost = expressAsyncHandler(
     }
 )
 
+const getPost = expressAsyncHandler(
+    async (req, res) => {
+        try{
+            const { id } = req.params;
+            const currentPost = await blogModel.findById(id);
+            await blogModel.findByIdAndUpdate(id,
+                { $inc: { totalView: 1 }, },
+                { new: true}
+                )
+            res.json(currentPost)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 module.exports = {
     createPost,
-    updatePost
+    updatePost,
+    getPost,
 }
