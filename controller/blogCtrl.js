@@ -1,8 +1,8 @@
 const expressAsyncHandler = require("express-async-handler");
-const { validateMongoDbId } = require("../utils/validateMongoDbId");
+
 
 const blogModel = require("../models/blogModel");
-const userModel = require("../models/userModel");
+
 
 
 const createPost = expressAsyncHandler(
@@ -35,7 +35,9 @@ const getPost = expressAsyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            const getPost = await blogModel.findById(id);
+            const getPost = await blogModel.findById(id)
+            .populate("like")
+            .populate("dislike");
             await blogModel.findByIdAndUpdate(id,
                 { $inc: { totalView: 1 }, },
                 { new: true}
