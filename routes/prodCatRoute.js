@@ -8,13 +8,13 @@ const {
     deleteCategory,
     getCategory,
     getCategories
-} = require('../controller/categoryCtrl');
+} = require('../controller/prodCatCtrl');
 
 
 router.post('/create', authMiddleware, isAdmin, createCategory);
+router.get('/all', getCategories);
 router.put('/update/:id', authMiddleware, isAdmin, updateCategory);
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteCategory);
-router.get('/all', getCategories);
 router.get('/:id', getCategory);
 
 
