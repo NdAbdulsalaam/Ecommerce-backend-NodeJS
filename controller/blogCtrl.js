@@ -1,11 +1,11 @@
-const expressAsyncHandler = require("express-async-handler");
+const asyncHandler = require("express-async-handler");
 
 
 const blogModel = require("../models/blogModel");
 
 
 
-const createPost = expressAsyncHandler(
+const createPost = asyncHandler(
     async (req, res) => {
         try{
             const newPost = await blogModel.create(req.body);
@@ -17,7 +17,7 @@ const createPost = expressAsyncHandler(
     }
 )
 
-const updatePost = expressAsyncHandler(
+const updatePost = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
@@ -31,7 +31,7 @@ const updatePost = expressAsyncHandler(
     }
 )
 
-const getPost = expressAsyncHandler(
+const getPost = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
@@ -49,7 +49,7 @@ const getPost = expressAsyncHandler(
     }
 )
 
-const getPosts = expressAsyncHandler(
+const getPosts = asyncHandler(
     async (req, res) => {
         try{
             const getPosts = await blogModel.find();
@@ -60,7 +60,7 @@ const getPosts = expressAsyncHandler(
     }
 )
 
-const deletePost = expressAsyncHandler(
+const deletePost = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
@@ -72,7 +72,7 @@ const deletePost = expressAsyncHandler(
     }
 )
 
-const likePost = expressAsyncHandler(
+const likePost = asyncHandler(
     async (req, res) => {
         const  postId = req.params.id;
         // Fetch liked post
@@ -122,7 +122,7 @@ const likePost = expressAsyncHandler(
     }
 )
 
-const dislikePost = expressAsyncHandler(
+const dislikePost = asyncHandler(
     async (req, res) => {
         const  postId = req.params.id;
         // Fetch liked post
