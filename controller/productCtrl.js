@@ -26,8 +26,8 @@ const getProduct = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            const findProduct = await productModel.findById(id)
-            res.json(findProduct)
+            const getProduct = await productModel.findById(id)
+            res.json(getProduct)
         } catch(error) {
             throw new Error(error);
         }
