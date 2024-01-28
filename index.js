@@ -7,9 +7,12 @@ const morgan = require('morgan')
 const PORT = process.env.PORT || 400;
 
 const dbConnect = require("./config/dbConnect");
+
 const authRouter = require('./routes/authRoute');
 const productRouter = require('./routes/productRoute');
 const blogRouter = require('./routes/blogRoute');
+const categoryRouter = require('./routes/categoryRoute')
+
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
 
 
@@ -23,6 +26,7 @@ app.use(cookieParser())
 app.use('/user', authRouter);
 app.use('/product', productRouter);
 app.use('/post', blogRouter); //NOTE: POST is used inplace of BLOG in routes & functions
+app.use('/category', categoryRouter);
 
 app.use(notFound)
 app.use(errorHandler) 
