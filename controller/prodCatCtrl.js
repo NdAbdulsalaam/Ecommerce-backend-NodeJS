@@ -19,7 +19,7 @@ const getCategory = asyncHandler(
         try{
             const { id } = req.params;
             const getCategory  = await prodCatModel.findById(id)
-            res.json(getCategory)
+            getCategory? res.json(getCategory): res.send("Record not Found");
         } catch(error) {
             throw new Error(error);
         }
@@ -30,7 +30,7 @@ const getCategories = asyncHandler(
     async (req, res) => {
        try {
             const getCategories = await prodCatModel.find();
-            res.json(getCategories)
+            getCategories? res.json(getCategories): res.send("Record not Found");
        } catch(error){
             throw new Error(error)
        }
@@ -44,7 +44,7 @@ const updateCategory = asyncHandler(
                 id,
                 req.body,
                 { new: true })
-            res.json(updateCategory)
+            updateCategory? res.json(updateCategory): res.send("Record not Found");
         } catch(error) {
             throw new Error(error)
         }
@@ -56,7 +56,7 @@ const deleteCategory = asyncHandler(
         try{
             const { id } = req.params;
             const deleteCategory = await prodCatModel.findByIdAndDelete(id)
-            res.send(`Category deleted successfully`)
+            deleteCategory? res.send('Category deleted successfully'): res.send("Record not Found");
         } catch(error) {
             throw new Error(error)
         }
