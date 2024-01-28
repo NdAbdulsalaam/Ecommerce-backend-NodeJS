@@ -26,6 +26,16 @@ const getCategory = asyncHandler(
     }
 )
 
+const getCategories = asyncHandler(
+    async (req, res) => {
+       try {
+            const getCategories = await categoryModel.find();
+            res.json(getCategories)
+       } catch(error){
+            throw new Error(error)
+       }
+    });
+
 const updateCategory = asyncHandler(
     async (req, res) => {
         try{
@@ -60,4 +70,5 @@ module.exports ={
     updateCategory,
     deleteCategory,
     getCategory,
+    getCategories,
 }
