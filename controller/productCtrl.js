@@ -150,7 +150,7 @@ const rateProduct = asyncHandler(
     async (req, res) => {
         const productId = req.params.id;
         const { star } = req.body;
-        const currentProduct = await productModel.findById(productId);
+        let currentProduct = await productModel.findById(productId);
         if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
         
         const currentUserId = req.user._id;
@@ -162,7 +162,6 @@ const rateProduct = asyncHandler(
 
         try{
             if(ratedByUser) {
-                console.log("Rated")
                 const updateRating = await productModel.updateOne(
                     {
                         rating: { $elemMatch: ratedByUser },  
@@ -172,7 +171,6 @@ const rateProduct = asyncHandler(
                     },
                     { new:true }
                 )
-                res.json(updateRating)
             } else{
                 const rateProduct = await productModel.findByIdAndUpdate(
                     productId,
@@ -186,13 +184,30 @@ const rateProduct = asyncHandler(
                     },
                     { new:true }
                 )
-                res.json(rateProduct)
             }
+            let currentProduct = await productModel.findById(productId);
+            const ratingCount = currentProduct.rating.length;
+
+            const ratingSum = currentProduct.rating
+            .map((item) => item.star)
+            .reduce((prev, curr) => prev + curr, 0);
+
+            const avgRating = parseFloat((ratingSum / ratingCount).toFixed(1));
+
+            const totalRatings = await productModel.findByIdAndUpdate(
+                productId,
+                {
+                    totalRating: avgRating
+                },
+                { new:true }
+            )
+            res.json(totalRatings)
         } catch(error) {
             throw new Error(error)
         }
     }
 )
+
 
 module.exports = {
     createProduct,
