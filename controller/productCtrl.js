@@ -112,16 +112,15 @@ const deleteProduct = asyncHandler(
 
 const addToWishlist = asyncHandler(
     async (req, res) => {
-        const productId = req.body.id;
+        const productId = req.params.id;
         const currentProduct = await productModel.findById(productId);
         if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
         
-        const currentUserId = req.user._d;
-        if(!currentUserId) throw new Error("You're not in. You need to login to add product to wishlist");
-
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to add/remove product to wishlist");
         try{
-            const addedByUser = await userModel.wishlist
-            .find((id) => id.toString === productId)
+            const currentUser = await userModel.findById(currentUserId)
+            const addedByUser = await currentUser.wishlist?.find((id) => id.toString() === productId.toString())
             if(addedByUser) {
                 const currentUser = await userModel.findByIdAndUpdate(
                 currentUserId,
@@ -152,5 +151,6 @@ module.exports = {
     getProduct,
     getProducts,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    addToWishlist,
 };

@@ -136,6 +136,7 @@ const dislikePost = asyncHandler(
         const likedByUser = currentPost.like?.find(
             (userId) => userId?.toString() === currentUserId.toString()
         );
+        console.log(likedByUser)
         if(likedByUser) {
             await blogModel.findByIdAndUpdate(
             postId,
