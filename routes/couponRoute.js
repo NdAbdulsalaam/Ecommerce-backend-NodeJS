@@ -4,18 +4,18 @@ const router = express.Router();
 const { authMiddleware, isAdmin } = require('../middlewares/authMidlleware');
 const {
     createCoupon,
-    // updateBrand,
-    // deleteBrand,
-    // getBrand,
-    // getBrands,
+    getCoupon,
+    getCoupons,
+    updateCoupon,
+    deleteCoupon,
 } = require('../controller/couponCtrl');
 
 
 router.post('/create', authMiddleware, isAdmin, createCoupon);
-// router.get('/all', getBrands);
-// router.put('/update/:id', authMiddleware, isAdmin, updateBrand);
-// router.delete('/delete/:id', authMiddleware, isAdmin, deleteBrand);
-// router.get('/:id', getBrand);
+router.get('/get/all', authMiddleware, isAdmin, getCoupons);
+router.put('/update/:id', authMiddleware, isAdmin, updateCoupon);
+router.delete('/delete/:id', authMiddleware, isAdmin, deleteCoupon);
+router.get('/get', getCoupon);
 
 
 
