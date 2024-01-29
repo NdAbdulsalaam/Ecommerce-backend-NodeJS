@@ -10,10 +10,12 @@ const dbConnect = require("./config/dbConnect");
 
 const authRouter = require('./routes/authRoute');
 const productRouter = require('./routes/productRoute');
-const blogRouter = require('./routes/blogRoute');
-const brandRouter = require('./routes/brandRoute');
 const prodCatRouter = require('./routes/prodCatRoute')
 const blogCatRouter = require('./routes/blogCatRoute')
+const blogRouter = require('./routes/blogRoute');
+const brandRouter = require('./routes/brandRoute');
+const couponRouter = require('./routes/couponRoute');
+
 
 
 const { notFound, errorHandler } = require('./middlewares/errorHandler');
@@ -28,10 +30,11 @@ app.use(cookieParser())
 
 app.use('/user', authRouter);
 app.use('/product', productRouter);
-app.use('/post', blogRouter); //NOTE: POST is used inplace of BLOG in routes & functions
-app.use('/brand', brandRouter);
 app.use('/product/category', prodCatRouter);
 app.use('/post/category', blogCatRouter);
+app.use('/post', blogRouter); //NOTE: POST is used inplace of BLOG in routes & functions
+app.use('/brand', brandRouter);
+app.use('/coupon', couponRouter);
 
 app.use(notFound)
 app.use(errorHandler) 
