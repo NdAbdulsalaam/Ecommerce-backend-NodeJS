@@ -146,6 +146,54 @@ const addToWishlist = asyncHandler(
     }
 )
 
+const rateProduct = asyncHandler(
+    async (req, res) => {
+        const productId = req.params.id;
+        const { star } = req.body;
+        const currentProduct = await productModel.findById(productId);
+        if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
+        
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to rate product");
+        
+        const ratedByUser = await currentProduct.rating.find(
+            (id) => id.postedBy.toString() === currentUserId.toString()
+            )
+
+        try{
+            if(ratedByUser) {
+                console.log("Rated")
+                const updateRating = await productModel.updateOne(
+                    {
+                        rating: { $elemMatch: ratedByUser },  
+                    },
+                    {
+                        $set: { "rating.$.star": star }
+                    },
+                    { new:true }
+                )
+                res.json(updateRating)
+            } else{
+                const rateProduct = await productModel.findByIdAndUpdate(
+                    productId,
+                    {
+                      $push: {
+                        rating: {
+                            star: star,
+                            postedBy:currentUserId
+                      },
+                    },  
+                    },
+                    { new:true }
+                )
+                res.json(rateProduct)
+            }
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 module.exports = {
     createProduct,
     getProduct,
@@ -153,4 +201,5 @@ module.exports = {
     updateProduct,
     deleteProduct,
     addToWishlist,
+    rateProduct
 };
