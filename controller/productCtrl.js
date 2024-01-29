@@ -218,27 +218,28 @@ const addComment = asyncHandler(
         const currentUserId = req.user._id;
         if(!currentUserId) throw new Error("You're not in. You need to login to rate product");
         
-        const ratedByUser = await currentProduct.rating.find(
+        const commentedByUser = await currentProduct.comment.find(
             (id) => id.postedBy.toString() === currentUserId.toString()
             )
 
         try{
-            if(ratedByUser) {
-                const updateRating = await productModel.updateOne(
+            if(commentedByUser) {
+                const addComment = await productModel.updateOne(
                     {
-                        rating: { $elemMatch: ratedByUser },  
+                        comment: { $elemMatch: commentedByUser },  
                     },
                     {
                         $set: { "rating.$.comment": comment }
                     },
                     { new:true }
                 )
+                res.json(addComment)
             } else{
-                const rateProduct = await productModel.findByIdAndUpdate(
+                const addComment = await productModel.findByIdAndUpdate(
                     productId,
                     {
                       $push: {
-                        rating: {
+                        comment: {
                             comment: comment,
                             postedBy: currentUserId
                       },
@@ -246,8 +247,8 @@ const addComment = asyncHandler(
                     },
                     { new:true }
                 )
+                res.json(addComment)
             }
-            res.json(addCommnet)
         } catch(error) {
             throw new Error(error)
         }
@@ -262,5 +263,6 @@ module.exports = {
     updateProduct,
     deleteProduct,
     addToWishlist,
-    rateProduct
+    rateProduct,
+    addComment
 };
