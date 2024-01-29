@@ -178,7 +178,7 @@ const rateProduct = asyncHandler(
                       $push: {
                         rating: {
                             star: star,
-                            postedBy:currentUserId
+                            postedBy: currentUserId
                       },
                     },  
                     },
@@ -202,6 +202,52 @@ const rateProduct = asyncHandler(
                 { new:true }
             )
             res.json(totalRatings)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
+const addComment = asyncHandler(
+    async (req, res) => {
+        const productId = req.params.id;
+        const { comment } = req.body;
+        let currentProduct = await productModel.findById(productId);
+        if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
+        
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to rate product");
+        
+        const ratedByUser = await currentProduct.rating.find(
+            (id) => id.postedBy.toString() === currentUserId.toString()
+            )
+
+        try{
+            if(ratedByUser) {
+                const updateRating = await productModel.updateOne(
+                    {
+                        rating: { $elemMatch: ratedByUser },  
+                    },
+                    {
+                        $set: { "rating.$.comment": comment }
+                    },
+                    { new:true }
+                )
+            } else{
+                const rateProduct = await productModel.findByIdAndUpdate(
+                    productId,
+                    {
+                      $push: {
+                        rating: {
+                            comment: comment,
+                            postedBy: currentUserId
+                      },
+                    },  
+                    },
+                    { new:true }
+                )
+            }
+            res.json(addCommnet)
         } catch(error) {
             throw new Error(error)
         }
