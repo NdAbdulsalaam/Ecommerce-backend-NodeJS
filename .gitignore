@@ -2,6 +2,7 @@
 git*
 *.txt
 next*/
+public/*
 
 # dependencies
 /node_modules
