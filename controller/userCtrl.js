@@ -123,9 +123,20 @@ const getUsers = asyncHandler(
 const updateUser = asyncHandler(
     async (req, res) => {
         try{
-            const { _id } = req.user;
-            validateMongoDbId(_id)
-            const updateUser = await userModel.findByIdAndUpdate(_id, {
+            const currentUserId = req.user._id;
+            validateMongoDbId(currentUserId)
+
+            // const currentRole = req.user.role
+            // let newRole = req.body?.role
+            // if(currentRole === "admin" && newRole) {
+            //     newRole = newRole;
+            // } else {
+            //     newRole = currentRole;
+            // }
+
+            const updateUser = await userModel.findByIdAndUpdate(
+                currentUserId, 
+            {
                 firstname: req?.body?.firstname,
                 lastname: req?.body?.lastname,
                 email: req?.body?.email,
