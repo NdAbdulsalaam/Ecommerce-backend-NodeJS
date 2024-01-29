@@ -1,10 +1,8 @@
 const asyncHandler = require("express-async-handler");
-const sluglify = require('slugify');
+const slugify = require('slugify');
 
 const productModel = require("../models/productModel");
-const { default: slugify } = require("slugify");
-const { validate } = require("../models/userModel");
-const { validateMongoDbId } = require("../utils/validateMongoDbId");
+const userModel = require("../models/userModel");
 
 
 const createProduct = asyncHandler(
@@ -89,7 +87,6 @@ const updateProduct = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            validateMongoDbId(id)
             const updateProduct = await productModel.findByIdAndUpdate(
                 id,
                 req.body,
@@ -105,7 +102,6 @@ const deleteProduct = asyncHandler(
     async (req, res) => {
         try{
             const { id } = req.params;
-            validateMongoDbId(id)
             const deleteProduct = await productModel.findByIdAndDelete(id)
             res.send(`Product deleted successfully`)
         } catch(error) {
@@ -114,6 +110,42 @@ const deleteProduct = asyncHandler(
     }
 )
 
+const addToWishlist = asyncHandler(
+    async (req, res) => {
+        const productId = req.body.id;
+        const currentProduct = await productModel.findById(productId);
+        if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
+        
+        const currentUserId = req.user._d;
+        if(!currentUserId) throw new Error("You're not in. You need to login to add product to wishlist");
+
+        try{
+            const addedByUser = await userModel.wishlist
+            .find((id) => id.toString === productId)
+            if(addedByUser) {
+                const currentUser = await userModel.findByIdAndUpdate(
+                currentUserId,
+                { 
+                    $pull: {wishlist: productId},
+                },
+                { new:true }
+            )
+            res.json(currentUser)
+            } else {
+                const currentUser = await userModel.findByIdAndUpdate(
+                    currentUserId,
+                    { 
+                        $push: {wishlist: productId},
+                    },
+                    { new:true }
+                )
+                res.json(currentUser)
+            }
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
 
 module.exports = {
     createProduct,
