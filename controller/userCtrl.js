@@ -174,6 +174,7 @@ const updateUser = asyncHandler(
                 email: req?.body?.email,
                 mobile: req?.body?.mobile,
                 role: req?.body?.role,
+                address: req?.body?.address,
             }, { new: true })
             res.json(updateUser)
         } catch(error) {
@@ -337,6 +338,23 @@ const getWishlist = asyncHandler(
     }
 )
 
+// const updateAddress = asyncHandler(
+//     async (req, res) => {
+//         try{
+//             const currentUserId = req.user._id;
+//             validateMongoDbId(currentUserId)
+
+//             const updateUser = await userModel.findByIdAndUpdate(
+//                 currentUserId, 
+//             {
+//                 "address": req?.body?.address,
+//             }, { new: true })
+//             res.json(updateUser)
+//         } catch(error) {
+//             throw new Error(error)
+//         }
+//     }
+// )
 
 module.exports = {
     RegisterUser,
