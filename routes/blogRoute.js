@@ -9,13 +9,16 @@ const {
     getPosts,
     deletePost,
     likePost,
-    dislikePost
+    dislikePost,
+    uploadPostImage
 } = require('../controller/blogCtrl');
+const { uploadImage, resizePostImage } = require('../middlewares/imageMiddleware');
 
 
 router.post('/create', authMiddleware, createPost);
 router.put('/update/:id', authMiddleware, updatePost);
-router.delete('/delete/:id', authMiddleware, deletePost);
+router.put('/image/upload/:id', authMiddleware,
+        uploadImage.array('images', 3), resizePostImage, uploadPostImage)
 router.put('/like/:id', authMiddleware, likePost);
 router.put('/dislike/:id', authMiddleware, dislikePost);
 router.get('/all', getPosts);

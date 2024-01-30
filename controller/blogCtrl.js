@@ -1,7 +1,8 @@
 const asyncHandler = require("express-async-handler");
-
+const fs = require('fs')
 
 const blogModel = require("../models/blogModel");
+const { cloudinaryUploader } = require("../utils/cloudinary");
 
 
 
@@ -173,6 +174,35 @@ const dislikePost = asyncHandler(
     }
 )
 
+const uploadPostImage = asyncHandler(
+    async (req, res) => {
+        const { id } = req.params;
+        try{
+            const uploader = (path) => cloudinaryUploader(path, "images");
+            const urls = []
+            files = req.files;
+            for (const file of files) {
+                const { path } = file;
+                const newPath = await uploader(path)
+                urls.push(newPath)
+                fs.unlinkSync(path)
+            }
+            const findPost = await blogModel.findByIdAndUpdate(
+              id,
+              {
+                image: urls.map((file) => file)
+              } ,
+              { new:true}
+            )
+              res.json(findPost)
+        } catch(error) {
+            throw new Error(error);
+        }
+        
+    }
+)
+
+
 
 module.exports = {
     createPost,
@@ -181,5 +211,6 @@ module.exports = {
     getPosts,
     deletePost,
     likePost,
-    dislikePost
+    dislikePost,
+    uploadPostImage
 }
