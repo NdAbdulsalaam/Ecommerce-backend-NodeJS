@@ -15,7 +15,7 @@ router.post('/create', authMiddleware, isAdmin, createBrand);
 router.get('/all', getBrands);
 router.put('/update/:id', authMiddleware, isAdmin, updateBrand);
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteBrand);
-router.get('/:id', getBrand);
+router.get('/get/:id', getBrand);
 
 
 

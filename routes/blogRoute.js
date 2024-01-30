@@ -22,7 +22,7 @@ router.put('/image/upload/:id', authMiddleware,
 router.put('/like/:id', authMiddleware, likePost);
 router.put('/dislike/:id', authMiddleware, dislikePost);
 router.get('/all', getPosts);
-router.get('/:id', getPost);
+router.get('/get/:id', getPost);
 
 
 module.exports = router;

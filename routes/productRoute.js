@@ -22,7 +22,7 @@ router.put('/rate/:id', authMiddleware, rateProduct)
 router.put('/comment/:id', authMiddleware, addComment)
 router.put('/update/:id', authMiddleware, isAdmin, updateProduct)
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteProduct)
-router.get('/:id', getProduct)
+router.get('/get/:id', getProduct)
  
 
 module.exports = router

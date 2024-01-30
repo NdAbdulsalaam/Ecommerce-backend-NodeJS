@@ -15,7 +15,7 @@ router.post('/create', authMiddleware, isAdmin, createCategory);
 router.get('/all', getCategories);
 router.put('/update/:id', authMiddleware, isAdmin, updateCategory);
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteCategory);
-router.get('/:id', getCategory);
+router.get('/get/:id', getCategory);
 
 
 

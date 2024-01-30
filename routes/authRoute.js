@@ -38,7 +38,7 @@ router.get('/wishlist', authMiddleware, getWishlist);
 router.delete('/delete/:id', authMiddleware, deleteUser);
 router.put('/block/:id', authMiddleware, isAdmin, blockUser);
 router.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);
-router.get('/:id', authMiddleware, getUser);
+router.get('/get/:id', authMiddleware, getUser);
 
 
 module.exports = router;
