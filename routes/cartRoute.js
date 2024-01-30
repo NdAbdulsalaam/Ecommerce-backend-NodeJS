@@ -7,8 +7,8 @@ const {
     getCart
 } = require('../controller/cartCtrl');
 
-router.post('/add/:id', authMiddleware , addToCart); 
-router.get('/get/:id',authMiddleware, getCart);
+router.post('/add/:id', authMiddleware, addToCart); 
+router.get('/get/:id', authMiddleware, getCart);
 
 
 module.exports = router
