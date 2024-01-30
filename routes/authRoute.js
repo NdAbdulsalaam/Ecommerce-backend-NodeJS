@@ -16,7 +16,8 @@ const {
     forgotPassword,
     resetPassword,
     loginAdmin,
-    addToWishlist
+    addToWishlist,
+    getWishlist
 } = require('../controller/userCtrl');
 
 const { authMiddleware, isAdmin } = require('../middlewares/authMidlleware');
@@ -33,6 +34,7 @@ router.put('/password/reset', forgotPassword);
 router.put('/password/reset/:token', resetPassword);
 router.put('/update/:id', authMiddleware, updateUser);
 router.put('/wishlist/add/:id', authMiddleware, addToWishlist) // id here is product id
+router.get('/wishlist', authMiddleware, getWishlist);
 router.delete('/delete/:id', authMiddleware, deleteUser);
 router.put('/block/:id', authMiddleware, isAdmin, blockUser);
 router.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);

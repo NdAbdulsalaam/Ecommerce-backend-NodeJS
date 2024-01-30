@@ -324,6 +324,19 @@ const addToWishlist = asyncHandler(
     }
 )
 
+const getWishlist = asyncHandler(
+    async (req, res) => {
+        const currentUserId = req.user._id
+        if(!currentUserId) throw new Error("You need to login")
+        try{
+            currentUser = await userModel.findById(currentUserId)
+            res.json(currentUser.wishlist)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 
 module.exports = {
     RegisterUser,
@@ -340,5 +353,6 @@ module.exports = {
     updatePassword,
     forgotPassword,
     resetPassword,
-    addToWishlist
+    addToWishlist,
+    getWishlist
 }
