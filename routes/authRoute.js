@@ -14,7 +14,9 @@ const {
     unblockUser,
     updatePassword,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    loginAdmin,
+    addToWishlist
 } = require('../controller/userCtrl');
 
 const { authMiddleware, isAdmin } = require('../middlewares/authMidlleware');
@@ -22,6 +24,7 @@ const { authMiddleware, isAdmin } = require('../middlewares/authMidlleware');
 
 router.post('/register', RegisterUser);
 router.post('/login', loginUser);
+router.post('/admin-login', loginAdmin);
 router.get('/logout', logoutUser);
 router.get('/all', getUsers);
 router.get('/token/refresh', refreshToken);
@@ -29,6 +32,7 @@ router.put('/password/update', authMiddleware, updatePassword);
 router.put('/password/reset', forgotPassword);
 router.put('/password/reset/:token', resetPassword);
 router.put('/update/:id', authMiddleware, updateUser);
+router.put('/wishlist/add/:id', authMiddleware, addToWishlist) // id here is product id
 router.delete('/delete/:id', authMiddleware, deleteUser);
 router.put('/block/:id', authMiddleware, isAdmin, blockUser);
 router.put('/unblock/:id', authMiddleware, isAdmin, unblockUser);

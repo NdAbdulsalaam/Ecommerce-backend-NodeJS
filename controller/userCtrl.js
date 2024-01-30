@@ -1,12 +1,15 @@
-const userModel = require('../models/userModel');
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+
+const productModel = require('../models/productModel');
+const userModel = require('../models/userModel');
 
 const { generateToken } = require('../config/jwtToken');
 const { generateRefreshToken } = require('../config/jwtRefreshToken');
 const { validateMongoDbId } = require('../utils/validateMongoDbId');
 const { sendEmail } = require('./emailCtrl');
+
 
 
 const RegisterUser = asyncHandler(
@@ -56,6 +59,35 @@ const loginUser = asyncHandler(
             throw new Error("Invalid Credentials")
         }
     })
+
+    const loginAdmin= asyncHandler(
+        async (req, res) => {
+            const { email, password } = req.body;
+            // Check if user exist
+            const findAdmin = await userModel.findOne({ email });
+            if(findAdmin.role.toLocaleLowerCase() !== "admin") throw new Error("You're not authorized")
+            if (findAdmin && await findAdmin.checkPassword(password)) {
+                const refreshToken = await generateRefreshToken(findAdmin._id)
+                const updateAdmin = await userModel.findOneAndUpdate(
+                    findAdmin._id, {
+                    refreshToken: refreshToken,
+                }, { new: true });
+                res.cookie('refreshToken', refreshToken,{
+                    httpOnly: true,
+                    maxAge: 24 * 60 * 60 * 1000
+                });
+                    res.json({
+                        _id: findAdmin._id,
+                        firstname: findAdmin?.firstname,
+                        lastname: findAdmin?.lastname,
+                        email: findAdmin.email,
+                        mobile: findAdmin?.mobile,
+                        token: generateToken(findAdmin?._id)
+            })
+            } else {
+                throw new Error("Invalid Credentials")
+            }
+        })
 
 const logoutUser = asyncHandler(
     async (req, res) => {
@@ -256,10 +288,47 @@ const unblockUser = asyncHandler(
     }
 )
 
+const addToWishlist = asyncHandler(
+    async (req, res) => {
+        const productId = req.params.id;
+        const currentProduct = await productModel.findById(productId);
+        if(!currentProduct) throw new Error("Can't retrieve product. It is either deleted or doesn't exist");
+        
+        const currentUserId = req.user._id;
+        if(!currentUserId) throw new Error("You're not in. You need to login to add/remove product to wishlist");
+        try{
+            const currentUser = await userModel.findById(currentUserId)
+            const addedByUser = await currentUser.wishlist?.find((id) => id.toString() === productId.toString())
+            if(addedByUser) {
+                const currentUser = await userModel.findByIdAndUpdate(
+                currentUserId,
+                { 
+                    $pull: {wishlist: productId},
+                },
+                { new:true }
+            )
+            res.json(currentUser)
+            } else {
+                const currentUser = await userModel.findByIdAndUpdate(
+                    currentUserId,
+                    { 
+                        $push: {wishlist: productId},
+                    },
+                    { new:true }
+                )
+                res.json(currentUser)
+            }
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
 
 module.exports = {
     RegisterUser,
     loginUser,
+    loginAdmin,
     refreshToken,
     logoutUser,
     getUser,
@@ -270,5 +339,6 @@ module.exports = {
     unblockUser,
     updatePassword,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    addToWishlist
 }

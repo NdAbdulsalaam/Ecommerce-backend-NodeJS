@@ -7,7 +7,6 @@ const {
     getProducts,
     updateProduct,
     deleteProduct,
-    addToWishlist,
     rateProduct,
     addComment,
     uploadProdImage
@@ -19,7 +18,6 @@ router.post('/create', authMiddleware, isAdmin, createProduct)
 router.get('/all', getProducts)
 router.put('/image/upload/:id', authMiddleware, isAdmin,
         uploadImage.array('images', 10), resizeProdImage, uploadProdImage)
-router.put('/wishlist/add/:id', authMiddleware, addToWishlist)
 router.put('/rate/:id', authMiddleware, rateProduct)
 router.put('/comment/:id', authMiddleware, addComment)
 router.put('/update/:id', authMiddleware, isAdmin, updateProduct)
