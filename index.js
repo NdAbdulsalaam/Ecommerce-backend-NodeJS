@@ -15,6 +15,7 @@ const blogCatRouter = require('./routes/blogCatRoute')
 const blogRouter = require('./routes/blogRoute');
 const brandRouter = require('./routes/brandRoute');
 const couponRouter = require('./routes/couponRoute');
+const cartRouter = require('./routes/cartRoute');
 
 
 
@@ -35,6 +36,7 @@ app.use('/post/category', blogCatRouter);
 app.use('/post', blogRouter); //NOTE: POST is used inplace of BLOG in routes & functions
 app.use('/brand', brandRouter);
 app.use('/coupon', couponRouter);
+app.use('/cart', cartRouter);
 
 app.use(notFound)
 app.use(errorHandler) 
