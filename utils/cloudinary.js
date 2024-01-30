@@ -7,7 +7,7 @@ cloudinary.config({
 });
 
 
-const cloudinaryUpload = async (file) => {
+const cloudinaryUploader = async (file) => {
     return new Promise((resolve) => {
         cloudinary.uploader.upload(file, (result) => {
             resolve({
@@ -19,4 +19,4 @@ const cloudinaryUpload = async (file) => {
 };
 
 
-module.exports = { cloudinaryUpload }
+module.exports = { cloudinaryUploader }
