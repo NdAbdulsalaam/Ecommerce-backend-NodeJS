@@ -28,7 +28,7 @@ const isAdmin = asyncHandler(
     async (req, res, next) => {
         const { email } = req.user
         const findAdmin = await userModel.findOne({ email })
-        if(findAdmin.role == "admin") {
+        if(findAdmin.role.toLocaleLowerCase() == "admin") {
             next();
         } else {
             throw new Error("You're not an admin")
