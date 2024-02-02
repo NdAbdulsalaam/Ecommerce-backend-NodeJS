@@ -10,9 +10,9 @@ const {
 } = require('../controller/cartCtrl');
 
 router.post('/add/:id', authMiddleware, addToCart); 
-router.get('/get/:id', authMiddleware, getCart);
 router.delete('/delete/:id', authMiddleware, emptyCart);
 router.put('/coupon/apply/:id', authMiddleware, applyCoupon);
+router.get('/:id', authMiddleware, getCart); //User id
 
 
 module.exports = router

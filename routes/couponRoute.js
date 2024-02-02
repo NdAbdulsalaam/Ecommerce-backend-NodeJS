@@ -12,11 +12,10 @@ const {
 
 
 router.post('/create', authMiddleware, isAdmin, createCoupon);
-router.get('/get/all', authMiddleware, isAdmin, getCoupons);
+router.get('/all', authMiddleware, isAdmin, getCoupons);
 router.put('/update/:id', authMiddleware, isAdmin, updateCoupon);
 router.delete('/delete/:id', authMiddleware, isAdmin, deleteCoupon);
-router.get('/get/:id', getCoupon); // this is user's id
-
+router.get('/:id', getCoupon); // this is user's id
 
 
 module.exports = router;
