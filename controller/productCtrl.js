@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const productModel = require("../models/productModel");
 const userModel = require("../models/userModel");
-const { cloudinaryUploader } = require("../utils/cloudinary");
+const { cloudinaryUploader, cloudinaryRemover } = require("../utils/cloudinary");
 
 
 const createProduct = asyncHandler(
@@ -223,7 +223,6 @@ const addComment = asyncHandler(
 
 const uploadProdImage = asyncHandler(
     async (req, res) => {
-        const { id } = req.params;
         try{
             const uploader = (path) => cloudinaryUploader(path, "images");
             const urls = []
@@ -234,14 +233,22 @@ const uploadProdImage = asyncHandler(
                 urls.push(newPath)
                 fs.unlinkSync(path)
             }
-            const findProduct = await productModel.findByIdAndUpdate(
-              id,
-              {
-                image: urls.map((file) => file)
-              } ,
-              { new:true}
-            )
-              res.json(findProduct)
+            const images = urls.map((file) => file)
+
+              res.json(images)
+        } catch(error) {
+            throw new Error(error);
+        }
+        
+    }
+)
+
+const deleteProdImage = asyncHandler(
+    async (req, res) => {
+        const { id } = req.params
+        try{
+            const remover = cloudinaryRemover(id, "images");
+            res.json({ "message": "Image deleted successfully"})
         } catch(error) {
             throw new Error(error);
         }
@@ -257,5 +264,6 @@ module.exports = {
     deleteProduct,
     rateProduct,
     addComment, 
-    uploadProdImage
+    uploadProdImage,
+    deleteProdImage
 };

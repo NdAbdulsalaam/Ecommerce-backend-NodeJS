@@ -10,13 +10,36 @@ cloudinary.config({
 const cloudinaryUploader = async (file) => {
     return new Promise((resolve) => {
         cloudinary.uploader.upload(file, (result) => {
-            resolve({
-                url: result.secure_url, 
-                resource_type: "auto"   
-            });
+            resolve(
+                {
+                    url: result.secure_url, 
+                    asset_id: result.asset_id,
+                    public_id: result.public_id
+                },
+                {
+                    resource_type: "auto" 
+                }
+            );
+        });
+    });
+};
+
+const cloudinaryRemover = async (file) => {
+    return new Promise((resolve) => {
+        cloudinary.uploader.destroy(file, (result) => {
+            resolve(
+                {
+                    url: result.secure_url, 
+                    asset_id: result.asset_id,
+                    public_id: result.public_id
+                },
+                {
+                    resource_type: "auto" 
+                }
+            );
         });
     });
 };
 
 
-module.exports = { cloudinaryUploader }
+module.exports = { cloudinaryUploader, cloudinaryRemover }
