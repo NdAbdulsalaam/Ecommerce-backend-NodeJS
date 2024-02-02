@@ -6,6 +6,7 @@ const { validateMongoDbId } = require('../utils/validateMongoDbId')
 const cartModel = require('../models/cartModel');
 const userModel = require('../models/userModel');
 const productModel = require('../models/productModel')
+const couponModel = require('../models/couponModel')
 
 
 const addToCart = asyncHandler(
@@ -19,17 +20,11 @@ const addToCart = asyncHandler(
                 let userProducts = [];
 
                 // check if user already added to cart
-                const { addedByUser } = await cartModel.findOne({ orderBy: currentUserId });
-            console.log(addedByUser)     
+                const addedByUser = await cartModel.findOne({ orderBy: currentUserId });    
             if (addedByUser) {
-                try {
-                    await addedByUser.remove();
-                    console.log('Document removed successfully');
-                } catch (error) {
-                    console.error('Error removing document:', error);
-                }
-            }
-                
+                    await cartModel.findOneAndDelete({ orderBy: currentUserId });
+                    res.json({ "message": "Document removed successfully" });
+            } else {
                 for(let i = 0; i < cart.length; i++) {
                     let cartObj = {};
                     cartObj.product = cart[i]._id;
@@ -52,6 +47,9 @@ const addToCart = asyncHandler(
 
                 }).save();
                 res.json(userCart)
+            }
+                
+                
         } catch {
             throw new Error(error)
         }
@@ -75,8 +73,56 @@ const getCart = asyncHandler(
     }
 )
 
+const emptyCart = asyncHandler(
+    async (req, res) => {
+        const currentUserId = req.user._id;
+        validateMongoDbId(currentUserId);
 
+        if(!currentUserId) throw new Error("You're not in. Kindly login");
+       
+        try{
+            // const currentUser = userModel.findById(currentUserId);
+            const emptyCart = await cartModel.findOneAndDelete({ orderBy:currentUserId });
+            res.json({ "message": "Cart empted!"})
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
+const applyCoupon = asyncHandler(
+    async (req, res) => {
+        const currentUserId = req.user._id;
+        const { coupon } = req.body;
+
+        validateMongoDbId(currentUserId);
+
+        if(!currentUserId) throw new Error("You're not in. Kindly login");
+        const validCoupon = await couponModel.findOne({ name:coupon })
+        if(!validCoupon) throw new Error("Invalid Coupon")
+        
+        try{
+            let { products, totalBeforeDiscount } = await cartModel.findOne(
+                { orderBy: currentUserId }
+                ).populate("products.product").exec();
+            let totalAfterDiscount = (totalBeforeDiscount - (totalBeforeDiscount * (validCoupon.discount/100))).toFixed(2)
+            
+            await cartModel.findOneAndUpdate(
+                { orderBy: currentUserId },
+                { totalAfterDiscount: totalAfterDiscount },
+                { neew:true }
+            ),
+            res.json(totalAfterDiscount)
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+)
+
+ 
 module.exports = {
     addToCart,
-    getCart
+    getCart,
+    emptyCart,
+    applyCoupon
 }
