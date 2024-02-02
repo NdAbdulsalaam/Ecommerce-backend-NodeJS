@@ -14,8 +14,11 @@ const prodCatRouter = require('./routes/prodCatRoute')
 const blogCatRouter = require('./routes/blogCatRoute')
 const blogRouter = require('./routes/blogRoute');
 const brandRouter = require('./routes/brandRoute');
+const colorRouter = require('./routes/colorRoute');
 const couponRouter = require('./routes/couponRoute');
 const cartRouter = require('./routes/cartRoute');
+const orderRouter = require('./routes/orderRoute');
+const enquiryRouter = require('./routes/enquiryRoute');
 
 
 
@@ -35,8 +38,11 @@ app.use('/product/category', prodCatRouter);
 app.use('/post/category', blogCatRouter);
 app.use('/post', blogRouter); //NOTE: POST is used inplace of BLOG in routes & functions
 app.use('/brand', brandRouter);
+app.use('/color', colorRouter);
 app.use('/coupon', couponRouter);
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
+app.use('/enquiry', enquiryRouter);
 
 app.use(notFound)
 app.use(errorHandler) 
