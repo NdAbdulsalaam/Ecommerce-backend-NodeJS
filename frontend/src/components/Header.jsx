@@ -1,8 +1,19 @@
 import React from 'react'
+import { NavLink, Link } from 'react-router-dom';
+
+
 
 function Header() {
   return (
-    <div>Header</div>
+    <div>
+      <header className='flex flex-shrink' >
+        <div className='' >
+          <div>
+
+          </div>
+        </div>
+      </header>
+    </div>
   )
 }
 
