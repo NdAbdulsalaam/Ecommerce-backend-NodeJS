@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities
+@tailwind utilities;
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@layer base {
+    html {
+      font-family: 'Inter', sans-serif;
+    }
+}
+  
+
+a {
+    display: inline-block;
+    text-decoration: none;
+}

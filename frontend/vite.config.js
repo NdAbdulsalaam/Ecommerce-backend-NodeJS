@@ -12,14 +12,14 @@ export default defineConfig({
   },
   plugins: [react()],
 
-  css: {
-    preprocessorOptions: {
-      css: {
-        import: [
-          './src/styles/main.css',
-        ],
-      },
-    },
-  },
+  // css: {
+  //   preprocessorOptions: {
+  //     css: {
+  //       import: [
+  //         './src/styles/main.css',
+  //       ],
+  //     },
+  //   },
+  // },
 });
 
