@@ -7,7 +7,8 @@
 :root {
     --bg-header: #131921;
     --mb-header: #3b4149;
-    --input-header: #febd69;
+    --header-input: #febd69;
+    --header-bottom: #232f3e;
 }
 
 body {
@@ -33,6 +34,10 @@ a {
     gap: 15px;
 }
 
+.gap-30 {
+    gap: 30px;
+}
+
 /* Header Style */
 .header-top-strip {
     background-color: var(--bg-header);
@@ -44,12 +49,35 @@ a {
 }
 
 .header-upper .input-group-text {
-    background-color: var(--input-header);
+    background-color: var(--header-input);
 }
 
 .header-upper .header-upper-links img {
     width: 30px;
     height: 30px;
+}
+
+.header-bottom {
+    background-color: var(--header-bottom);
+}
+
+.header-bottom .menu-links a,
+.header-bottom .dropdown button {
+    color: white;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    letter-spacing: 0.3;
+    text-transform: uppercase;
+}
+
+.header-bottom .dropdown button:focus {
+    box-shadow: none;
+}
+
+.header-bottom .dropdown button img {
+    height: 25px;
+    width: 25px;
 }
 
 /* End Header Style */
