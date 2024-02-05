@@ -5,8 +5,9 @@
 }
 
 :root {
-    --class-131921: #131921;
-    --class-3b4149: #3b4149;
+    --bg-header: #131921;
+    --mb-header: #3b4149;
+    --input-header: #febd69;
 }
 
 body {
@@ -19,13 +20,23 @@ a {
     text-decoration: none;
 }
 
+.form-control:focus {
+    box-shadow: none;
+    border-color: inherit;
+}
+
 /* Header Style */
 .header-top-strip {
-    background-color: var(--class-131921);
-    border-bottom: 1px solid var(--class-3b4149);
+    background-color: var(--bg-header);
+    border-bottom: 2px solid var(--mb-header);
 }
+
 .header-upper {
-    background-color: var(--class-131921);
+    background-color: var(--bg-header);
+}
+
+.header-upper .input-group-text {
+    background-color: var(--input-header);
 }
 
 /* End Header Style */
