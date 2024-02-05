@@ -6,15 +6,15 @@ import { BsSearch } from 'react-icons/bs';
 function Header() {
   return (
     <div>
-      <header className='header-top-strip py-3'>
+      <header className='header-top-strip align-items-center text-sm py-3'>
         <div className='container-xxl' >
-          <div className='row align-items-center'>
-            <div className='col-6 align-items-center'>
+          <div className='row'>
+            <div className='col-6 d-flex justify-content-center'>
               <p className='text-white mb-0'>
                 Free Shipping over ₦50K & Free Returns
               </p>
             </div>
-            <div className='col-6'>
+            <div className='col-6 d-flex justify-content-center'>
               <p className='text-white mb-0'>
                 Hotline: <a className='text-white' href='tel:+2348168874902'>+2348168874902</a>
               </p>
@@ -25,12 +25,12 @@ function Header() {
       <header className="header-upper">
         <div className="container-xxl">
           <div className="row align-items-center">
-            <div className="col-2">
+            <div className="col-2 d-flex justify-content-center">
               <h2>
                 <Link className="text-white" >Nuyola</Link>
               </h2>
             </div>
-            <div className="col-5">
+            <div className="col-5 py-2">
               <div className="input-group">
                 <input type="text" className="form-control py-2" 
                   placeholder="Search products here..." 
