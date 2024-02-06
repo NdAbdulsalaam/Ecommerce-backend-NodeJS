@@ -97,4 +97,22 @@ a {
     width: 25px;
 }
 
-/* End Header Style */
+/* End Header */
+
+
+/* Footer */
+
+footer {
+    background-color: var(--header-bottom);
+}
+footer:not(:first-child) {
+    border-top: 2px solid var(--mb-header);
+}
+
+
+footer .input-group-text {
+    background-color: var(--header-bottom);
+    color: white;
+    padding: 8px;
+}
+/* End Footer */
