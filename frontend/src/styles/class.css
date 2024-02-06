@@ -75,6 +75,23 @@ a {
     box-shadow: none;
 }
 
+.header-bottom .dropdown-menu{
+    background-color: var(--header-bottom);
+    width: 100%;
+    /* transform: translate3d(0px, 57px, 0px) !important; */
+}
+
+.header-bottom .dropdown-item{
+    margin: 0px;
+    padding: 5px 0px 0px 10px;
+    border-bottom: solid 1px var(--mb-header);
+}
+
+.header-bottom .dropdown-item:hover{
+    background-color: transparent;
+    color: var(--header-input) !important;
+}
+
 .header-bottom .dropdown button img {
     height: 25px;
     width: 25px;
