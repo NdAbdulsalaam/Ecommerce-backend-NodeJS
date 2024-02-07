@@ -3,6 +3,10 @@
     background-color: white !important;
   }
   
+a {
+    text-decoration: none;
+}
+
   .icon-hover:hover i {
     color: #3b71ca !important;
   }
