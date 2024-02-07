@@ -1,22 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-@layer base {
-    html {
-      font-family: 'Inter', sans-serif;
-    }
-}
+.icon-hover:hover {
+    border-color: #3b71ca !important;
+    background-color: white !important;
+  }
   
-
-a {
-    display: inline-block;
-    text-decoration: none;
-}
+  .icon-hover:hover i {
+    color: #3b71ca !important;
+  }
