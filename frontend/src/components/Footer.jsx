@@ -10,13 +10,13 @@ function Footer() {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-5 col-md-6 col-12">
-              <div className="footer-top-data d-flex gap-30 align-items-center justify-content-center">
+              <div className="d-flex align-items-center justify-content-center">
                 <img src='images/newsletter.png' />
                 <h4 className='text-white mb-0'>Sign Up For Our Newsletter</h4>
               </div>
             </div>
-            <div className='col-lg-6 col-md-6 col-12'>
-            <div className="input-group align-items-center">
+            <div className='col-lg-6 col-md-6 col-8'>
+            <div className="input-group  d-flex align-items-center justify-content-center">
                 <input type="text" className="form-control py-1" 
                   placeholder="Your Email Address" 
                   aria-label="Your Email Address"
