@@ -685,6 +685,85 @@ function Home() {
         </div>
       </section>
       {/* End Shop Home List  */}
+      {/* Start Cowndown Area */}
+      <section className="cown-down">
+        <div className="section-inner ">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-6 col-12 padding-right">
+                <div className="image">
+                  <img src="https://via.placeholder.com/750x590" alt="#" />
+                </div>	
+              </div>	
+              <div className="col-lg-6 col-12 padding-left">
+                <div className="content">
+                  <div className="heading-block">
+                    <p className="small-title">Deal of day</p>
+                    <h3 className="title">Neutrogena Ultra Sheer</h3>
+                    <p className="text">Suspendisse massa leo, vestibulum cursus nulla sit amet, frungilla placerat lorem. Cars fermentum, sapien. </p>
+                    <h1 className="price">$1200 <s>$1890</s></h1>
+                    <div className="coming-time">
+                      <div className="clearfix" data-countdown="2021/02/30"></div>
+                    </div>
+                  </div>
+                </div>	
+              </div>	
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* /End Cowndown Area */}
+      {/* Start Shop Blog  */}
+      <section class="shop-blog section">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title">
+                <h2>From Our Blog</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-12">
+              {/* Start Single Blog  */}
+              <div class="shop-single-blog">
+                <img src="https://via.placeholder.com/370x300" alt="#" />
+                <div class="content">
+                  <p class="date">12 Feb., 2024. Monday</p>
+                  <a href="#" class="title">Antimicrobial resistance</a>
+                  <a href="#" class="more-btn">Read more...</a>
+                </div>
+              </div>
+              {/* End Single Blog  */}
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+              {/* Start Single Blog  */}
+              <div class="shop-single-blog">
+                <img src="https://via.placeholder.com/370x300" alt="#" />
+                <div class="content">
+                  <p class="date">12 Feb., 2024. Monday</p>
+                  <a href="#" class="title">Mutivitamins to boost immunity</a>
+                  <a href="#" class="more-btn">Read more...</a>
+                </div>
+              </div>
+              {/* End Single Blog  */}
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+              {/* Start Single Blog  */}
+              <div class="shop-single-blog">
+                <img src="https://via.placeholder.com/370x300" alt="#" />
+                <div class="content">
+                  <p class="date">12 Feb., 2024. Monday</p>
+                  <a href="#" class="title">Regular excercise</a>
+                  <a href="#" class="more-btn">Read more...</a>
+                </div>
+              </div>
+              {/* End Single Blog  */}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* End Shop Blog  */}
 
     </div>
   )
