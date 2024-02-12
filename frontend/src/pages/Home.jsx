@@ -82,7 +82,7 @@ function Home() {
             <div className="row">
               <div className="col-12">
                 <div className="section-title">
-                  <h2>Trending Item</h2>
+                  <h2>Trending Items</h2>
                 </div>
               </div>
             </div>
@@ -92,12 +92,12 @@ function Home() {
                   <div className="nav-main">
                     {/* Tab Nav */}
                     <ul className="nav nav-tabs" id="myTab" role="tablist">
-                      <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#man" role="tab">Man</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#women" role="tab">Woman</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#kids" role="tab">Kids</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#accessories" role="tab">Accessories</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#essential" role="tab">Essential</a></li>
-                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#prices" role="tab">Prices</a></li>
+                      <li className="nav-item"><a className="nav-link active" data-toggle="tab" href="#man" role="tab">Supplements</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#women" role="tab">Skincare</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#kids" role="tab">First Aid</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#accessories" role="tab">Medical Devices</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#essential" role="tab">Essential Drugs</a></li>
+                      <li className="nav-item"><a className="nav-link" data-toggle="tab" href="#prices" role="tab">Infant Foods and Beverages</a></li>
                     </ul>
                     {/*/ End Tab Nav */}
                   </div>
