@@ -128,7 +128,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Multivitamins and Minerals</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -154,7 +154,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Omega-3 Fatty Acids</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -180,7 +180,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Probiotics</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -207,7 +207,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">New Arrivals</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -233,7 +233,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Calcium and Vitamin D</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -260,7 +260,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Herbal Supplements</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -286,7 +286,7 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Iron Supplements</a></h3>
                                 <div className="product-price">
-                                  <span>$29.00</span>
+                                  <span>₦29.00</span>
                                 </div>
                               </div>
                             </div>
@@ -313,8 +313,8 @@ function Home() {
                               <div className="product-content">
                                 <h3><a href="product-details.html">Featured Products</a></h3>
                                 <div className="product-price">
-                                  <span className="old">$60.00</span>
-                                  <span>$50.00</span>
+                                  <span className="old">₦60.00</span>
+                                  <span>₦50.00</span>
                                 </div>
                               </div>
                             </div>
@@ -397,8 +397,8 @@ function Home() {
                   <div className="product-content">
                     <h3><a href="product-details.html">Advil (ibuprofen)</a></h3>
                     <div className="product-price">
-                      <span className="old">$25.00</span>
-                      <span>$20.00</span>
+                      <span className="old">₦25.00</span>
+                      <span>₦20.00</span>
                     </div>
                   </div>
                 </div>
@@ -424,7 +424,7 @@ function Home() {
                     <div className="product-content">
                         <h3><a href="product-details.html">Zyrtec (cetirizine)</a></h3>
                         <div className="product-price">
-                            <span>$50.00</span>
+                            <span>₦50.00</span>
                         </div>
                     </div>
                   </div>
@@ -451,7 +451,7 @@ function Home() {
                     <div className="product-content">
                         <h3><a href="product-details.html">Nature's Field Vit-E</a></h3>
                         <div className="product-price">
-                            <span>$50.00</span>
+                            <span>₦50.00</span>
                         </div>
                     </div>
                 </div>
@@ -477,7 +477,7 @@ function Home() {
                     <div className="product-content">
                         <h3><a href="product-details.html">Accu-Chek (by Roche Diabetes Care)</a></h3>
                         <div className="product-price">
-                            <span>$150.00</span>
+                            <span>₦150.00</span>
                         </div>
                     </div>
                 </div>
@@ -512,7 +512,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h4 className="title"><a href="#">Coppertone Sport</a></h4>
-                      <p className="price with-discount">$59</p>
+                      <p className="price with-discount">₦59</p>
                     </div>
                   </div>
                 </div>
@@ -530,7 +530,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$44</p>
+                      <p className="price with-discount">₦44</p>
                     </div>
                   </div>
                 </div>
@@ -548,7 +548,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$89</p>
+                      <p className="price with-discount">₦89</p>
                     </div>
                   </div>
                 </div>
@@ -575,7 +575,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$65</p>
+                      <p className="price with-discount">₦65</p>
                     </div>
                   </div>
                 </div>
@@ -593,7 +593,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$33</p>
+                      <p className="price with-discount">₦33</p>
                     </div>
                   </div>
                 </div>
@@ -611,7 +611,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$77</p>
+                      <p className="price with-discount">₦77</p>
                     </div>
                   </div>
                 </div>
@@ -638,7 +638,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$22</p>
+                      <p className="price with-discount">₦22</p>
                     </div>
                   </div>
                 </div>
@@ -656,7 +656,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$35</p>
+                      <p className="price with-discount">₦35</p>
                     </div>
                   </div>
                 </div>
@@ -674,7 +674,7 @@ function Home() {
                   <div className="col-lg-6 col-md-6 col-12 no-padding">
                     <div className="content">
                       <h5 className="title"><a href="#">Coppertone Sport</a></h5>
-                      <p className="price with-discount">$99</p>
+                      <p className="price with-discount">₦99</p>
                     </div>
                   </div>
                 </div>
@@ -701,7 +701,7 @@ function Home() {
                     <p className="small-title">Deal of day</p>
                     <h3 className="title">Neutrogena Ultra Sheer</h3>
                     <p className="text">Suspendisse massa leo, vestibulum cursus nulla sit amet, frungilla placerat lorem. Cars fermentum, sapien. </p>
-                    <h1 className="price">$1200 <s>$1890</s></h1>
+                    <h1 className="price">₦1200 <s>₦1890</s></h1>
                     <div className="coming-time">
                       <div className="clearfix" data-countdown="2021/02/30"></div>
                     </div>
@@ -773,7 +773,7 @@ function Home() {
               <div className="single-service">
                 <i className="ti-rocket"></i>
                 <h4>Free shiping</h4>
-                <p>Orders over $100</p>
+                <p>Orders over ₦100</p>
               </div>
               {/* End Single Service */}
             </div>
