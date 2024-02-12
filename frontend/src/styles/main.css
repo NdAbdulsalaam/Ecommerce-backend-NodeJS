@@ -4844,18 +4844,6 @@ Version:1.0
 .footer{
 	background:#222;
 }
-.footer-newsletter {
-  margin: -40px 0px 50px 0px ;
-  color: white;
-}
-footer .input-group-text {
-  border: 1px solid white;
-  border-left: 0px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-
-
-}
 .footer .about {
 	padding-right: 50px;
 }
