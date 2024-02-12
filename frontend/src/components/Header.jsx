@@ -62,8 +62,8 @@ function Header() {
 					<div className="col-lg-8 col-md-7 col-12">
 						<div className="search-bar-top">
 							<div className="search-bar">
-								<select>
-									<option selected="selected">All Category</option>
+								<select defaultValue="All Category">
+									<option>All Category</option>
 									<option>watch</option>
 									<option>mobile</option>
 									<option>kid’s item</option>
