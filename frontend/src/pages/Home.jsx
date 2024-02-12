@@ -3,6 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <div>
+      
       {/* Slider Area */}
       <section className="hero-slider">
         {/* Single Slider */}
@@ -14,8 +15,8 @@ function Home() {
                   <div className="row">
                     <div className="col-lg-7 col-12">
                       <div className="hero-text">
-                        <h1><span>UP TO 50% OFF </span>Shirt For Man</h1>
-                        <p>Maboriosam in a nesciung eget magnae <br> dapibus disting tloctio in the find it pereri </br> odiy maboriosm.</p>
+                        <h1><span>UP TO 50% OFF </span>Covid-19 Vaccine</h1>
+                        <p>Maboriosam in a nesciung eget magnae <br /> dapibus disting tloctio in the find it pereri <br /> odiy maboriosm.</p>
                         <div className="button">
                           <a href="#" className="btn">Shop Now!</a>
                         </div>
@@ -27,11 +28,14 @@ function Home() {
             </div>
           </div>
         </div>
-        {/*/ End Single Slider */}
+        {/* End Single Slider */}
       </section>
-      {/*/ End Slider Area */}
+      {/* End Slider Area */}
+
+      
+
     </div>
   )
 }
 
-export default Home
+export default Home;
