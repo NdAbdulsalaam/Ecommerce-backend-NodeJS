@@ -322,8 +322,7 @@ function Home() {
                         </div>
                       </div>
                     </div>
-                    {/*/ End Single Tab */}
-
+                    {/* End Single Tab */}       
                   </div>
                 </div>
               </div>
@@ -331,6 +330,38 @@ function Home() {
           </div>
         </div>
       {/* End Product Area */}
+      {/* Start Midium Banner  */}
+      <section className="midium-banner">
+        <div className="container">
+          <div className="row">
+            {/* Single Banner  */}
+            <div className="col-lg-6 col-md-6 col-12">
+              <div className="single-banner">
+                <img src="https://via.placeholder.com/600x370" alt="#" />
+                <div className="content">
+                  <p>Personal Care</p>
+                  <h3>Look Fresh <br />Up to<span> 50%</span></h3>
+                  <a href="#">Shop Now</a>
+                </div>
+              </div>
+            </div>
+            {/* /End Single Banner  */}
+            {/* Single Banner  */}
+            <div className="col-lg-6 col-md-6 col-12">
+              <div className="single-banner">
+                <img src="https://via.placeholder.com/600x370" alt="#" />
+                <div className="content">
+                  <p>Infant Foods</p>
+                  <h3>Bouncing Baby <br /> up to <span>70%</span></h3>
+                  <a href="#" className="btn">Shop Now</a>
+                </div>
+              </div>
+            </div>
+            {/* /End Single Banner  */}
+          </div>
+        </div>
+      </section>
+      {/* End Midium Banner */}
 
     </div>
   )
