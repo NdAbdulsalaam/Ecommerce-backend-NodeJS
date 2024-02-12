@@ -5,31 +5,29 @@ function Footer() {
     <div>
       <footer className="footer">
 		{/* Footer Top */}
-    <div className='section'>
-    <div className=' footer-newsletter'>
+		{/* Start Shop Newsletter  */}
+		<section className="shop-newsletter section">
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-5 col-md-6 col-12">
-              <div className="d-flex align-items-center justify-content-center">
-                <img src='images/newsletter.png' />
-                <h4 className='text-white mb-0'>Sign Up For Our Newsletter</h4>
-              </div>
-            </div>
-            <div className='col-lg-6 col-md-6 col-8'>
-            <div className="input-group  d-flex align-items-center justify-content-center">
-                <input type="text" className="form-control py-1" 
-                  placeholder="Your Email Address" 
-                  aria-label="Your Email Address"
-                  aria-describedby="basic-addon2" 
-                />
-                <span className="input-group-text p-1" id="basic-addon2">
-                  Subscribe
-                </span>
+          <div className="inner-top">
+            <div className="row">
+              <div className="col-lg-8 offset-lg-2 col-12">
+                {/* Start Newsletter Inner */}
+                <div className="inner">
+                  <h4>Newsletter</h4>
+                  <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                  <form action="mail/mail.php" method="get" target="_blank" className="newsletter-inner">
+                    <input name="EMAIL" placeholder="Your email address" required="" type="email" />
+                    <button className="btn">Subscribe</button>
+                  </form>
+                </div>
+                {/* End Newsletter Inner */}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+      {/* End Shop Newsletter */}
+      <div className='section'>
 		<div className="footer-top">
 			<div className="container">
 				<div className="row">
